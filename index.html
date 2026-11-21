@@ -9,167 +9,198 @@
 <title>DETROITBADDIE</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  background: white;
-  color: black;
+  background: #fff;
+  color: #111;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.hero {
-  height: 430px;
-  position: relative;
-  text-align: center;
-  overflow: hidden;
-  background-color: #fff;
-  background-image:
-    linear-gradient(#d0d0d0 1px, transparent 1px),
-    linear-gradient(90deg,#d0d0d0 1px,transparent 1px);
-  background-size: 80px 80px;
-  background-position: center top;
-  border-radius: 35px 35px 0 0;
+.banner {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
 }
 
-.hero h1 {
-  margin: 30px 0 55px;
-  font-size: clamp(28px,8vw,46px);
+.profile {
+  min-height: 320px;
+  padding: 34px 16px;
+  text-align: center;
+  background-image:
+    linear-gradient(#dedede 1px,transparent 1px),
+    linear-gradient(90deg,#dedede 1px,transparent 1px);
+  background-size: 85px 85px;
+  background-position: center;
+}
+
+h1 {
+  margin: 0 0 48px;
+  font-size: clamp(25px,7.8vw,43px);
   font-weight: 900;
   letter-spacing: -1.5px;
-  white-space: nowrap;
 }
 
-.link {
+.btn {
   display: inline-block;
-  background: #8190f2;
-  color: white;
-  padding: 18px 31px;
-  border-radius: 50px;
-  font-size: 18px;
-  font-weight: 900;
-  text-decoration: none;
+  padding: 17px 36px;
   border: none;
+  border-radius: 40px;
+  background: #9295ed;
+  color: white;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
   cursor: pointer;
 }
 
-.footer {
+.help {
+  max-width: 360px;
+  margin: 26px auto;
+  padding: 23px;
+  border-radius: 18px;
+  background: #f5f5f7;
   text-align: center;
-  color: #aaa;
-  font-size: 12px;
-  padding: 70px 15px;
+  line-height: 1.7;
+  font-size: 14px;
 }
 
-/* Age confirmation */
+.help p {
+  color: #555;
+}
+
+.help button {
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 25px;
+  padding: 12px 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 45px 15px;
+  color: #aaa;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.4);
+  z-index: 100;
+  background: rgba(0,0,0,.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 22px;
-  z-index: 10;
+  padding: 20px;
 }
 
 .modal {
   background: white;
+  border-radius: 25px;
+  padding: 35px 25px;
   width: 100%;
-  max-width: 340px;
-  border-radius: 20px;
-  padding: 30px 25px;
+  max-width: 350px;
   text-align: center;
 }
 
 .modal h2 {
-  font-size: 34px;
-  margin: 0 0 15px;
+  margin: 0;
+  font-size: 58px;
+  font-weight: 900;
 }
 
 .modal p {
-  font-size: 14px;
+  color: #666;
   line-height: 1.6;
-  color: #555;
+  font-size: 14px;
+  margin: 20px 0;
 }
 
-.modal button {
+.modal .btn {
   width: 100%;
-  margin-top: 15px;
+  padding: 17px 10px;
 }
 
 .exit {
-  background: none;
   border: none;
+  background: transparent;
   color: #777;
-  padding: 15px;
-  cursor: pointer;
-}
-
-.hidden { display: none; }
-
-.browser-note {
-  display: none;
-  max-width: 340px;
-  margin: 25px auto;
-  padding: 18px;
-  background: #f4f4f4;
-  border-radius: 14px;
-  text-align: center;
   font-size: 13px;
-  line-height: 1.6;
+  padding: 18px;
+  cursor: pointer;
 }
 
-.copy {
-  background: #e9e9e9;
-  border: 0;
-  padding: 12px 20px;
-  border-radius: 20px;
-  cursor: pointer;
+.hidden {
+  display: none !important;
 }
 </style>
 </head>
 
 <body>
 
-<section class="hero">
+<img
+  class="banner"
+  src="./banner.jpg"
+  alt="Poolside profile banner"
+>
+
+<section class="profile">
   <h1>DETROITBADDIE</h1>
 
-  <a class="link"
-     href="https://tinyurl.com/detroitbaddie">
+  <a
+    class="btn"
+    id="mainLink"
+    href="https://tinyurl.com/detroitbaddie">
     SAY HI
   </a>
 </section>
 
-<div class="browser-note" id="browserNote">
-  <strong>Opening from Instagram?</strong>
+<section class="help hidden" id="instagramHelp">
+  <strong>OPEN IN SAFARI ↗</strong>
+
   <p>
-    Tap the three dots in Instagram's
-    browser and select
-    "Open in external browser"
-    if available.
+    You're browsing inside Instagram.
+    To open this page in Safari,
+    tap the three dots (•••) at
+    the top of Instagram's browser,
+    then choose "Open in external browser"
+    if that option appears.
   </p>
-  <button class="copy" onclick="copyLink()">
+
+  <button onclick="copyLink()">
     Copy Link
   </button>
-  <p id="copyMessage"></p>
-</div>
 
-<footer class="footer">
+  <p id="copyStatus"></p>
+</section>
+
+<footer>
   18+ ONLY
 </footer>
 
-<div class="overlay" id="ageOverlay">
+<div class="overlay" id="ageGate">
   <div class="modal">
     <h2>18+</h2>
+
     <p>
       This page links to adult content.
       You must be at least 18 years old
       to continue.
     </p>
-    <button class="link" onclick="enterSite()">
+
+    <button class="btn" onclick="confirmAge()">
       I'M 18+ — ENTER
     </button>
-    <button class="exit" onclick="leaveSite()">
+
+    <button class="exit" onclick="exitPage()">
       I'M UNDER 18
     </button>
   </div>
@@ -179,37 +210,52 @@ body {
 const destination =
   "https://tinyurl.com/detroitbaddie";
 
-function enterSite() {
-  document.getElementById("ageOverlay")
+const isInstagram =
+  /Instagram/i.test(navigator.userAgent);
+
+function confirmAge() {
+  document.getElementById("ageGate")
     .classList.add("hidden");
 
-  sessionStorage.setItem("ageConfirmed","yes");
+  sessionStorage.setItem(
+    "detroitAgeConfirmed", "yes"
+  );
 }
 
-function leaveSite() {
-  window.location.replace("https://www.google.com");
+function exitPage() {
+  window.location.replace(
+    "https://www.google.com"
+  );
 }
 
-function copyLink() {
-  navigator.clipboard.writeText(destination)
-    .then(() => {
-      document.getElementById("copyMessage")
-        .textContent = "Copied! Paste into Safari.";
-    })
-    .catch(() => {
-      document.getElementById("copyMessage")
-        .textContent = destination;
-    });
+async function copyLink() {
+  const status =
+    document.getElementById("copyStatus");
+
+  try {
+    await navigator.clipboard.writeText(
+      destination
+    );
+    status.textContent =
+      "Copied! Paste the link into Safari.";
+  } catch (error) {
+    status.textContent =
+      "Copy this URL: " + destination;
+  }
 }
 
-if (sessionStorage.getItem("ageConfirmed") === "yes") {
-  document.getElementById("ageOverlay")
+if (
+  sessionStorage.getItem(
+    "detroitAgeConfirmed"
+  ) === "yes"
+) {
+  document.getElementById("ageGate")
     .classList.add("hidden");
 }
 
-if (/Instagram/i.test(navigator.userAgent)) {
-  document.getElementById("browserNote")
-    .style.display = "block";
+if (isInstagram) {
+  document.getElementById("instagramHelp")
+    .classList.remove("hidden");
 }
 </script>
 
