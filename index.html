@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
- content="width=device-width,initial-scale=1">
+      content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <title>DETROITBADDIE</title>
 
@@ -15,131 +15,69 @@
 
 body {
   margin: 0;
-  background: #fff;
-  color: #111;
+  background: #ffffff;
+  color: #111111;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .banner {
+  display: block;
   width: 100%;
-  height: 270px;
+  height: 290px;
   object-fit: cover;
   object-position: center 35%;
-  display: block;
 }
 
 .profile {
   min-height: 320px;
-  padding: 34px 16px;
+  padding: 35px 16px;
   text-align: center;
+
   background-image:
-    linear-gradient(#dedede 1px,transparent 1px),
-    linear-gradient(90deg,#dedede 1px,transparent 1px);
+    linear-gradient(
+      #dedede 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      #dedede 1px,
+      transparent 1px
+    );
+
   background-size: 85px 85px;
   background-position: center;
 }
 
 h1 {
-  margin: 0 0 48px;
-  font-size: clamp(25px,7.8vw,43px);
+  margin: 0 0 55px;
+  font-size: clamp(25px, 7.8vw, 43px);
   font-weight: 900;
   letter-spacing: -1.5px;
 }
 
-.btn {
+.button {
   display: inline-block;
-  padding: 17px 36px;
+  padding: 18px 40px;
+  background: #8994ed;
+  color: white;
   border: none;
   border-radius: 40px;
-  background: #9295ed;
-  color: white;
   font-size: 17px;
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
 }
 
-.help {
-  max-width: 360px;
-  margin: 26px auto;
-  padding: 23px;
-  border-radius: 18px;
-  background: #f5f5f7;
-  text-align: center;
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-.help p {
-  color: #555;
-}
-
-.help button {
-  border: 1px solid #ccc;
-  background: white;
-  border-radius: 25px;
-  padding: 12px 20px;
-  font-size: 14px;
-  cursor: pointer;
+.button:active {
+  transform: scale(0.98);
 }
 
 footer {
+  padding: 55px 15px;
   text-align: center;
-  padding: 45px 15px;
-  color: #aaa;
+  color: #aaaaaa;
   font-size: 12px;
   letter-spacing: 2px;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: rgba(0,0,0,.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.modal {
-  background: white;
-  border-radius: 25px;
-  padding: 35px 25px;
-  width: 100%;
-  max-width: 350px;
-  text-align: center;
-}
-
-.modal h2 {
-  margin: 0;
-  font-size: 58px;
-  font-weight: 900;
-}
-
-.modal p {
-  color: #666;
-  line-height: 1.6;
-  font-size: 14px;
-  margin: 20px 0;
-}
-
-.modal .btn {
-  width: 100%;
-  padding: 17px 10px;
-}
-
-.exit {
-  border: none;
-  background: transparent;
-  color: #777;
-  font-size: 13px;
-  padding: 18px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none !important;
 }
 </style>
 </head>
@@ -148,115 +86,35 @@ footer {
 
 <img
   class="banner"
-  src="./IMG_0822.jpeg"
-  alt="Poolside profile banner"
+  src="./banner.jpg"
+  alt="Detroit Baddie profile banner"
 >
 
 <section class="profile">
+
   <h1>DETROITBADDIE</h1>
 
   <a
-    class="btn"
-    id="mainLink"
-    href="https://tinyurl.com/detroitbaddie">
+    class="button"
+    id="sayHi"
+    href="#">
     SAY HI
   </a>
-</section>
 
-<section class="help hidden" id="instagramHelp">
-  <strong>OPEN IN SAFARI ↗</strong>
-
-  <p>
-    You're browsing inside Instagram.
-    To open this page in Safari,
-    tap the three dots (•••) at
-    the top of Instagram's browser,
-    then choose "Open in external browser"
-    if that option appears.
-  </p>
-
-  <button onclick="copyLink()">
-    Copy Link
-  </button>
-
-  <p id="copyStatus"></p>
 </section>
 
 <footer>
   18+ ONLY
 </footer>
 
-<div class="overlay" id="ageGate">
-  <div class="modal">
-    <h2>18+</h2>
-
-    <p>
-      This page links to adult content.
-      You must be at least 18 years old
-      to continue.
-    </p>
-
-    <button class="btn" onclick="confirmAge()">
-      I'M 18+ — ENTER
-    </button>
-
-    <button class="exit" onclick="exitPage()">
-      I'M UNDER 18
-    </button>
-  </div>
-</div>
-
 <script>
+
 const destination =
-  "https://tinyurl.com/detroitbaddie";
+  "https://detroitbaddiexo.com/r/CtbQV8Zhfj?fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJmZGlkFlEqKTRzO8qpQDPKbS6ws2DbPJD6knpzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafdxTUQQ4G8doBP849osGmvdEGsHgIb3slESA4LsVss0RdK1_CQnCkLppXPfQ_aem_HJSYUovYJBuyFd-rRYyQAA";
 
-const isInstagram =
-  /Instagram/i.test(navigator.userAgent);
+document.getElementById("sayHi")
+  .href = destination;
 
-function confirmAge() {
-  document.getElementById("ageGate")
-    .classList.add("hidden");
-
-  sessionStorage.setItem(
-    "detroitAgeConfirmed", "yes"
-  );
-}
-
-function exitPage() {
-  window.location.replace(
-    "https://www.google.com"
-  );
-}
-
-async function copyLink() {
-  const status =
-    document.getElementById("copyStatus");
-
-  try {
-    await navigator.clipboard.writeText(
-      destination
-    );
-    status.textContent =
-      "Copied! Paste the link into Safari.";
-  } catch (error) {
-    status.textContent =
-      "Copy this URL: " + destination;
-  }
-}
-
-if (
-  sessionStorage.getItem(
-    "detroitAgeConfirmed"
-  ) === "yes"
-) {
-  document.getElementById("ageGate")
-    .classList.add("hidden");
-}
-
-if (isInstagram) {
-  document.getElementById("instagramHelp")
-    .classList.remove("hidden");
-}
 </script>
 
 </body>
