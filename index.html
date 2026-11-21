@@ -2,168 +2,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-  <title>Opening Browser...</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+ content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>DETROITBADDIE</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
+body {
+  margin: 0;
+  background: white;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 30px;
-    }
+.hero {
+  height: 430px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  background-color: #fff;
+  background-image:
+    linear-gradient(#d0d0d0 1px, transparent 1px),
+    linear-gradient(90deg,#d0d0d0 1px,transparent 1px);
+  background-size: 80px 80px;
+  background-position: center top;
+  border-radius: 35px 35px 0 0;
+}
 
-    h1 {
-      font-size: 26px;
-    }
+.hero h1 {
+  margin: 30px 0 55px;
+  font-size: clamp(28px,8vw,46px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  white-space: nowrap;
+}
 
-    p {
-      color: #ccc;
-      line-height: 1.6;
-    }
+.link {
+  display: inline-block;
+  background: #8190f2;
+  color: white;
+  padding: 18px 31px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 900;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
 
-    button {
-      background: #ff2d8d;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      padding: 16px 30px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 15px;
-    }
+.footer {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  padding: 70px 15px;
+}
 
-    .instructions {
-      display: none;
-      margin-top: 25px;
-    }
+/* Age confirmation */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  z-index: 10;
+}
 
-    a {
-      color: #ff75b6;
-    }
-  </style>
+.modal {
+  background: white;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 20px;
+  padding: 30px 25px;
+  text-align: center;
+}
+
+.modal h2 {
+  font-size: 34px;
+  margin: 0 0 15px;
+}
+
+.modal p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.modal button {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.exit {
+  background: none;
+  border: none;
+  color: #777;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.hidden { display: none; }
+
+.browser-note {
+  display: none;
+  max-width: 340px;
+  margin: 25px auto;
+  padding: 18px;
+  background: #f4f4f4;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.copy {
+  background: #e9e9e9;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
-  <div class="container">
 
-    <h1>Opening Your Browser...</h1>
+<section class="hero">
+  <h1>DETROITBADDIE</h1>
 
-    <p id="status">
-      Redirecting you to the page.
+  <a class="link"
+     href="https://tinyurl.com/detroitbaddie">
+    SAY HI
+  </a>
+</section>
+
+<div class="browser-note" id="browserNote">
+  <strong>Opening from Instagram?</strong>
+  <p>
+    Tap the three dots in Instagram's
+    browser and select
+    "Open in external browser"
+    if available.
+  </p>
+  <button class="copy" onclick="copyLink()">
+    Copy Link
+  </button>
+  <p id="copyMessage"></p>
+</div>
+
+<footer class="footer">
+  18+ ONLY
+</footer>
+
+<div class="overlay" id="ageOverlay">
+  <div class="modal">
+    <h2>18+</h2>
+    <p>
+      This page links to adult content.
+      You must be at least 18 years old
+      to continue.
     </p>
-
-    <button onclick="openBrowser()">
-      Open in Browser
+    <button class="link" onclick="enterSite()">
+      I'M 18+ — ENTER
     </button>
-
-    <div class="instructions" id="instructions">
-      <p>
-        If you're still inside Instagram,
-        tap the three dots (•••) and
-        choose "Open in external browser."
-      </p>
-
-      <p>
-        <a href="https://tinyurl.com/detroitbaddie">
-          Continue to website
-        </a>
-      </p>
-    </div>
-
+    <button class="exit" onclick="leaveSite()">
+      I'M UNDER 18
+    </button>
   </div>
+</div>
 
 <script>
 const destination =
   "https://tinyurl.com/detroitbaddie";
 
-const userAgent = navigator.userAgent || "";
+function enterSite() {
+  document.getElementById("ageOverlay")
+    .classList.add("hidden");
 
-const isInstagram =
-  /Instagram/i.test(userAgent);
-
-const isAndroid =
-  /Android/i.test(userAgent);
-
-const isIOS =
-  /iPhone|iPad|iPod/i.test(userAgent);
-
-function showInstructions() {
-  document.getElementById(
-    "instructions"
-  ).style.display = "block";
-
-  document.getElementById(
-    "status"
-  ).textContent =
-    "If your browser did not open, " +
-    "follow the instructions below.";
+  sessionStorage.setItem("ageConfirmed","yes");
 }
 
-function openBrowser() {
-
-  if (!isInstagram) {
-    window.location.href = destination;
-    return;
-  }
-
-  if (isAndroid) {
-
-    const cleanURL =
-      destination.replace(/^https?:\/\//, "");
-
-    const intentURL =
-      "intent://" + cleanURL +
-      "#Intent;" +
-      "scheme=https;" +
-      "package=com.android.chrome;" +
-      "S.browser_fallback_url=" +
-      encodeURIComponent(destination) +
-      ";end";
-
-    window.location.href = intentURL;
-
-  } else if (isIOS) {
-
-    // Experimental Safari URL scheme.
-    // Instagram may block this attempt.
-    window.location.href =
-      "x-safari-" + destination;
-
-  } else {
-    window.location.href = destination;
-  }
-
-  setTimeout(showInstructions, 1500);
+function leaveSite() {
+  window.location.replace("https://www.google.com");
 }
 
-window.addEventListener("load", () => {
+function copyLink() {
+  navigator.clipboard.writeText(destination)
+    .then(() => {
+      document.getElementById("copyMessage")
+        .textContent = "Copied! Paste into Safari.";
+    })
+    .catch(() => {
+      document.getElementById("copyMessage")
+        .textContent = destination;
+    });
+}
 
-  if (!isInstagram) {
-    window.location.replace(destination);
-  } else {
-    setTimeout(openBrowser, 500);
-  }
+if (sessionStorage.getItem("ageConfirmed") === "yes") {
+  document.getElementById("ageOverlay")
+    .classList.add("hidden");
+}
 
-});
+if (/Instagram/i.test(navigator.userAgent)) {
+  document.getElementById("browserNote")
+    .style.display = "block";
+}
 </script>
 
 </body>
