@@ -5,15 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1">
-  <title>Opening Link...</title>
+  <title>Opening Browser...</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       background: #111;
       color: white;
       font-family: Arial, sans-serif;
@@ -21,8 +25,9 @@
     }
 
     .container {
+      width: 100%;
+      max-width: 420px;
       padding: 30px;
-      max-width: 400px;
     }
 
     h1 {
@@ -38,8 +43,8 @@
       background: #ff2d8d;
       color: white;
       border: none;
-      padding: 16px 30px;
       border-radius: 30px;
+      padding: 16px 30px;
       font-size: 17px;
       font-weight: bold;
       cursor: pointer;
@@ -50,35 +55,43 @@
       display: none;
       margin-top: 25px;
     }
+
+    a {
+      color: #ff75b6;
+    }
   </style>
 </head>
 
 <body>
+  <div class="container">
 
-<div class="container">
+    <h1>Opening Your Browser...</h1>
 
-  <h1>Opening Your Browser...</h1>
-
-  <p>
-    We're redirecting you to the page.
-  </p>
-
-  <button onclick="openBrowser()">
-    Open in Browser
-  </button>
-
-  <div class="instructions" id="instructions">
-    <p>
-      If you're still inside Instagram,
-      tap the three dots (•••) and
-      select "Open in external browser."
+    <p id="status">
+      Redirecting you to the page.
     </p>
+
+    <button onclick="openBrowser()">
+      Open in Browser
+    </button>
+
+    <div class="instructions" id="instructions">
+      <p>
+        If you're still inside Instagram,
+        tap the three dots (•••) and
+        choose "Open in external browser."
+      </p>
+
+      <p>
+        <a href="https://tinyurl.com/detroitbaddie">
+          Continue to website
+        </a>
+      </p>
+    </div>
+
   </div>
 
-</div>
-
 <script>
-
 const destination =
   "https://tinyurl.com/detroitbaddie";
 
@@ -92,6 +105,18 @@ const isAndroid =
 
 const isIOS =
   /iPhone|iPad|iPod/i.test(userAgent);
+
+function showInstructions() {
+  document.getElementById(
+    "instructions"
+  ).style.display = "block";
+
+  document.getElementById(
+    "status"
+  ).textContent =
+    "If your browser did not open, " +
+    "follow the instructions below.";
+}
 
 function openBrowser() {
 
@@ -118,23 +143,16 @@ function openBrowser() {
 
   } else if (isIOS) {
 
-    // Attempts an external-browser handoff.
-    // iOS Instagram may block this URL scheme.
+    // Experimental Safari URL scheme.
+    // Instagram may block this attempt.
     window.location.href =
       "x-safari-" + destination;
 
   } else {
-
     window.location.href = destination;
-
   }
 
-  setTimeout(() => {
-    document.getElementById(
-      "instructions"
-    ).style.display = "block";
-  }, 1500);
-
+  setTimeout(showInstructions, 1500);
 }
 
 window.addEventListener("load", () => {
@@ -146,9 +164,7 @@ window.addEventListener("load", () => {
   }
 
 });
-
 </script>
 
 </body>
 </html>
-
