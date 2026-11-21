@@ -1,1 +1,154 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Opening Link...</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px;
+      max-width: 400px;
+    }
+
+    h1 {
+      font-size: 26px;
+    }
+
+    p {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    button {
+      background: #ff2d8d;
+      color: white;
+      border: none;
+      padding: 16px 30px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .instructions {
+      display: none;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Opening Your Browser...</h1>
+
+  <p>
+    We're redirecting you to the page.
+  </p>
+
+  <button onclick="openBrowser()">
+    Open in Browser
+  </button>
+
+  <div class="instructions" id="instructions">
+    <p>
+      If you're still inside Instagram,
+      tap the three dots (•••) and
+      select "Open in external browser."
+    </p>
+  </div>
+
+</div>
+
+<script>
+
+const destination =
+  "https://tinyurl.com/detroitbaddie";
+
+const userAgent = navigator.userAgent || "";
+
+const isInstagram =
+  /Instagram/i.test(userAgent);
+
+const isAndroid =
+  /Android/i.test(userAgent);
+
+const isIOS =
+  /iPhone|iPad|iPod/i.test(userAgent);
+
+function openBrowser() {
+
+  if (!isInstagram) {
+    window.location.href = destination;
+    return;
+  }
+
+  if (isAndroid) {
+
+    const cleanURL =
+      destination.replace(/^https?:\/\//, "");
+
+    const intentURL =
+      "intent://" + cleanURL +
+      "#Intent;" +
+      "scheme=https;" +
+      "package=com.android.chrome;" +
+      "S.browser_fallback_url=" +
+      encodeURIComponent(destination) +
+      ";end";
+
+    window.location.href = intentURL;
+
+  } else if (isIOS) {
+
+    // Attempts an external-browser handoff.
+    // iOS Instagram may block this URL scheme.
+    window.location.href =
+      "x-safari-" + destination;
+
+  } else {
+
+    window.location.href = destination;
+
+  }
+
+  setTimeout(() => {
+    document.getElementById(
+      "instructions"
+    ).style.display = "block";
+  }, 1500);
+
+}
+
+window.addEventListener("load", () => {
+
+  if (!isInstagram) {
+    window.location.replace(destination);
+  } else {
+    setTimeout(openBrowser, 500);
+  }
+
+});
+
+</script>
+
+</body>
+</html>
+
